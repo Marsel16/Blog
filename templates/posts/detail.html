@@ -1,0 +1,59 @@
+{% extends 'layouts/main.html' %}
+
+{% block content %}
+    <style>
+        .image > img {
+            width: 50%;
+            margin-left: 25%;
+        }
+
+        .comments {
+            width: 70%;
+            margin-left: 15%;
+        }
+
+        .comments > div {
+            height: 45px;
+            margin-bottom: 20px;
+            background: #242b2e;
+            padding: 10px;
+        }
+        .author {
+            color: #fff;
+            flex: 18px;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        .text {
+            font-size: 15px;
+            font-family: sans-serif;
+        }
+        .post {
+            width: 70%;
+            margin-left: 15%;
+        }
+    </style>
+    <div class="post">
+        <div class="image">
+            <img src="/media/{{ post.photo }}/" alt="">
+        </div>
+        <div>
+            <div style="display:flex; justify-content: space-between">
+                <h1>{{ post.title }}</h1>
+            </div>
+            <h5>{{ post.description }}</h5>
+            <div>
+                <p>{{ post.likes }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="comments">
+        {% for comment in comments %}
+            <div>
+                <p class="author">{{ comment.author.username }}</p>
+                <p class="text">{{ comment.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
