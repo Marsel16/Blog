@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Post, Hashtag, Comment
+
 # Create your views here.
 def posts_view(request):
     if request.method == 'GET':
@@ -12,10 +13,11 @@ def posts_view(request):
 
 def hashtags_view(request):
     if request.method == 'GET':
+        hashtags = Hashtag.objects.all()
         data = {
-            'hashtags': Hashtag.objects.all()
+            'hashtags': hashtags
         }
-        return render(request, 'posts/hashtags.html', context=data)
+        return render(request, 'hashtags/hashtags.html', context=data)
 
 def detail_view(request, **kwargs):
     if request.method == 'GET':
