@@ -1,0 +1,11 @@
+{% extends 'layouts/main.html'%}
+
+{% block content %}
+    <div>
+         <form action="/posts/create/" method="post">
+             {% csrf_token %}
+             {{ form.as_p }}
+             <input style="color: red" type="submit" value="Create Posts" class="btn btn-primary" >
+         </form>
+    </div>
+{% endblock %}

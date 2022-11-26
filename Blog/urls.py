@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hashtags/', hashtags_view),
     path('posts/', posts_view),
-    path('posts/<int:id>/', detail_view)
+    path('posts/<int:id>/', detail_view),
+    path('posts/create/', posts_create_view)
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -13,7 +13,7 @@
         }
 
         .comments > div {
-            height: 45px;
+            height: 55px;
             margin-bottom: 20px;
             background: #242b2e;
             padding: 10px;
@@ -33,6 +33,12 @@
             width: 70%;
             margin-left: 15%;
         }
+         .create_comments {
+             width: 70%;
+             margin-left: 15%;
+             margin-bottom: 40px;
+             margin-top: 20px;
+         }
     </style>
     <div class="post">
         <div class="image">
@@ -47,6 +53,13 @@
                 <p>{{ post.likes }}</p>
             </div>
         </div>
+    </div>
+    <div class="create_comments">
+        <form action="/posts/{{ post.id }}/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-primary" value="оставить коментарии">
+        </form>
     </div>
     <div class="comments">
         {% for comment in comments %}
