@@ -29,7 +29,14 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                     <a class="nav-link" href="/posts/">Posts</a>
                     <a class="nav-link" href="/hashtags/">Hashtags</a>
-                    <a style="color: aqua" class="nav-link" href="/posts/create">Create Posts</a>
+                    {% if user %}
+                        <a style="color: aqua" class="nav-link" href="/posts/create">Create Posts</a>
+                        <p class="nav-link"> User: {{ user.username }}</p>
+                        <a href="/users/logout/" class="btn btn-primary">Logout</a>
+                    {% else %}
+                        <a href="/users/login/" class="nav-link">Login</a>
+                        <a href="/users/register/" class="nav-link">Register</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

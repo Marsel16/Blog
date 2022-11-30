@@ -13,7 +13,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from posts.views import *
 from django.conf.urls.static import static
 from Blog import settings
@@ -23,7 +23,8 @@ urlpatterns = [
     path('hashtags/', hashtags_view),
     path('posts/', posts_view),
     path('posts/<int:id>/', detail_view),
-    path('posts/create/', posts_create_view)
+    path('posts/create/', posts_create_view),
+    path('users/', include('users.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
