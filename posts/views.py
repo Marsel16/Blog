@@ -5,13 +5,29 @@ from .forms import PostCreateForm, CommentCreateForm
 from users.utils import get_user_from_request
 
 # Create your views here.
-
+PAGINATION_LIMIT = 3
 
 def posts_view(request):
     if request.method == 'GET':
+        search_text = request.GET.get('search')
+        hashtag_id = request.GET.get('hashtag_id')
+        page = int(request.GET.get('page', 1))
+        if hashtag_id:
+            posts = Post.objects.filter(hashtag=Hashtag.objects.get(id=hashtag_id))
+        else:
+            posts = Post.objects.all()
+        if search_text:
+            posts = posts.filter(title__icontains=search_text)
+        max_page = round(posts.__len__() / PAGINATION_LIMIT)
+        page = int(page)
+        posts = posts[PAGINATION_LIMIT * (page - 1): PAGINATION_LIMIT * page]
         data = {
-            'posts': Post.objects.all(),
-            'user': get_user_from_request(request)
+            'posts': posts,
+            'user': get_user_from_request(request),
+            'hashtag_id': hashtag_id,
+            'current_page': page,
+            "search_text": search_text,
+            'max_page': list(range(1, max_page + 1))
         }
         return render(request, 'posts/posts.html', context=data)
 

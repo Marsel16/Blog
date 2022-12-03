@@ -1,21 +1,49 @@
+{#{% extends 'layouts/main.html' %}#}
+{##}
+{#{% block content %}#}
+{#    <style type="text/css">#}
+{#        .hashtags {#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            width: 80%;#}
+{#            margin-left: 10%;#}
+{#        }#}
+{#    </style>#}
+{#    <div class="hashtags">#}
+{#        {% for hashtag in hashtags %}#}
+{#            <div class="card" style="width: 20%">#}
+{#                <div class="card-body">#}
+{#                    <h5 class="card-title">{{ hashtag.title }}</h5>#}
+{#                    <a href="/posts/?hashtag_id={{ hashtag.id }}" class="btn btn-primary">More</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endblock %}#}
 {% extends 'layouts/main.html' %}
 
 {% block content %}
     <style type="text/css">
-        .hashtags {
+        .category > img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .hashtag {
             display: flex;
             justify-content: space-between;
-            width: 80%;
-            margin-left: 10%;
+            width: 20%;
         }
     </style>
     <div class="hashtags">
         {% for hashtag in hashtags %}
-            <div class="card" style="width: 20%">
-                <div class="card-body">
-                    <h5 class="card-title">{{ hashtag.title }}</h5>
-                    <a href="/posts/?hashtag_id={{ hashtag.id }}" class="btn btn-primary">More</a>
-                </div>
+            <div class="hashtag">
+                <img src="/media/{{ hashtag.icon }}" alt="">
+                <h3>
+                    <a href="/posts/?hashtag_id={{ hashtag.id }}">
+                        {{ hashtag.title }} ({{ hashtag.posts.count }})
+                    </a>
+                </h3>
             </div>
         {% endfor %}
     </div>
