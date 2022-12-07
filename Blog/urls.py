@@ -19,13 +19,15 @@ from django.conf.urls.static import static
 from Blog import settings
 
 urlpatterns = [
+    path('', main_page_view),
     path('admin/', admin.site.urls),
-    path('hashtags/', hashtags_view),
-    path('posts/', posts_view),
-    path('posts/<int:id>/', detail_view),
-    path('posts/create/', posts_create_view),
+    path('hashtags/', HashtagsView.as_view()),
+    path('posts/', PostView.as_view()),
+    path('posts/<int:id>/', PostDetailView.as_view()),
+    path('posts/create/', PostCreateView.as_view()),
     path('users/', include('users.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
